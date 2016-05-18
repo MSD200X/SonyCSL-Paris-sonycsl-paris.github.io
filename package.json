@@ -1,0 +1,23 @@
+{
+  "name": "sonycsl-paris.github.io",
+  "version": "1.0.0",
+  "description": "leadsheetjs demo website",
+  "main": "index.html",
+  "config": {
+      "modulesDir": "./js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "node symlink.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SonyCSL-Paris/sonycsl-paris.github.io"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "LeadsheetJS": "git+https://github.com/SonyCSL-Paris/LeadsheetJS.git#master"
+  }
+}
+
