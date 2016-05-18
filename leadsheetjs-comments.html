@@ -1,0 +1,129 @@
+---
+layout: default
+---
+{% capture htmlContent %}
+	<p class="subtitle"><em>Adding comments to a lead sheet</em></p>
+	<div id="leadsheet_container"></div>
+	<div id="player_container"></div>
+	<div id="informations_container">
+		<h3>Usage</h3>
+		<p>You can create text annotations on the audio wave, the notes of the lead sheet, and eventually the chords:</p>
+		<ol>1. Select an area (either audio or notes)</ol>
+		<ol>2. Press the <em>K</em> key</ol>
+		<ol>3. Write your comment and save it</ol>
+		<h3>Integration</h3>
+		<p>To show the text bubbles correctly, it is important to include the styles added in this css page. Check de classes in the <em>comments</em> section of the css files</p>
+		<p>Persistance has to be implementd by the user by means of an object <em>serverComments</em> that should implement some CRUD methods and be sent to the <em>CommentsModed</em> object. (check <em>CommentsModel.js</em>)</p>
+	</div>
+	<div id="code_container"></div>
+{% endcapture %}
+{% capture codeContent %}
+<script type="text/javascript">
+	require([
+		'LJS',
+		'jquery',
+		'pubsub',
+		'bootstrap',
+		'tests/songs/solar',
+	], function(LJS, $, pubsub, bootstrap, song) {
+		$(document).ready(function() {
+			var init = function() {
+				var params = {
+					viewer: {
+						HTMLElement: $("#leadsheet_container")[0],
+						viewOptions: {
+							displayTitle: true,
+							displayComposer: true,
+							layer: true, // a layer placed in top of the basic canvas. Needed if we want to be able to edit  
+							typeResize: "fluid", // "scale" | "fluid"
+							heightOverflow: "auto", // "scroll" | "auto"
+						}
+					},
+					player: {
+						HTMLElement: $('#player_container')[0],
+						imgUrl: 'images/LeadsheetJS/player', // folder where are your player picture
+						viewOptions: {
+							displayMetronome: false,
+							displayLoop: false,
+							displayTempo: false,
+							changeInstrument: false,
+							autoload: false,
+							progressBar: true
+						},
+						audio:{
+							audioFile: 'http://lsdb.flow-machines.com/sampleLJS/media/solar_120.mp3',
+							tempo: 120
+
+						}
+					}
+				};
+				var myLeadsheet = LJS.init(song, params);
+
+				// currentUser
+				var userSession = {
+					name: 'John',
+					id: 'id1',
+					img: '/images/LeadsheetJS/avatar.png'
+				};
+
+				// we initialize the Comment module
+				var commentsMng = new LJS.Comments({
+					audio: myLeadsheet.audioPlayer,
+					viewer: myLeadsheet.viewer, 
+					song: myLeadsheet.songModel, 
+					userSession: userSession, 
+					noteSpaceManager: myLeadsheet.noteSpaceManager, 
+					notesCursor: myLeadsheet.notesCursor,
+					//chordsEditor: myLeadsheet.edition.chordEdition  // if chords were selectable we could add chord comments (in this case it is disabled)
+				});
+
+				//and add comments
+				commentsMng.addComment({
+					userName: userSession.name,
+					id: '1234e',
+					userId: '323324422',
+					img: userSession.img,
+					text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+					timeInterval: [2.5891220809932014, 3.668046112917529],
+					date: '1 min ago',
+					type: 'audio'
+				});
+				
+				commentsMng.addComment({
+					userName: userSession.name,
+					id: '98765',
+					img:userSession.img,
+					text: 'This is a notes comment' ,
+					beatInterval:[1, 5],
+					date: '1 day ago',
+					type: 'notes'
+				});
+
+				// chord comment example:
+				// 
+				/*commentsMng.addComment({
+				 userName: userSession.name,
+					id:'123k304',
+					img: userSession.img,
+					text: 'this is chords comment',
+					beatInterval:[1, 5],
+					date: '1 month ago',
+					type: 'chords'	
+				});*/
+			};
+			init();
+
+			function addSnippet(language, text) {
+				var id = Math.ceil(Math.random() * 1000000);
+				$('#code_container').append('<p>' + language.charAt(0).toUpperCase() + language.slice(1).toLowerCase() + ':<br/><pre><code class="language-' + language + '"><span id="code-' + id + '"></span></pre></code></p>');
+				$('#code-' + id).text(text);
+			}
+
+			addSnippet('javascript', init.toString());
+			Prism.highlightAll();
+		});
+	});</script>
+{% endcapture %}
+
+{% include leadsheetjs.html %}
+		

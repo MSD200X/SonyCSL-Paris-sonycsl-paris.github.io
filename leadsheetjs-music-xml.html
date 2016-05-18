@@ -1,0 +1,66 @@
+---
+layout: default
+---
+{% capture htmlContent %}
+<p class="subtitle"><em>Import MusicXML with LeadsheetJS</em></p>
+<div id="leadsheet_container"></div>
+<div id="informations_container">
+	<p>
+		You can easily import MusicXML into LeadsheetJS<br/>
+		You can both import notes and chords.
+	</p>
+	<p>
+		There is some limitations to MusicXML import:<br />
+		1) When you have 2 chords on same bar we do not detect beat positions, we assume for eg. it's first and third beat for a 4/4.<br />
+		2) Chord labels may vary from Chords notations types and MusicXML versions, you may need to build a parser from your chord notations system to LeadsheetJS systems.
+	</p>
+</div>
+<div id="code_container"></div>
+
+{% endcapture %}
+
+{% capture codeContent %}
+<script type="text/javascript">
+	require([
+		'LJS',
+		'jquery',
+		'pubsub',
+		'bootstrap'
+	], function(LJS, $, pubsub, bootstrap, musicXMLSong) {
+		$(document).ready(function() {
+			var init = function() {
+				function fetch(uri) {
+					var req = new XMLHttpRequest();
+					req.open('GET', uri, false);
+					req.send(null);
+					if (req.readyState != 4) return undefined;
+					return req.responseText;
+				}
+				var musicXMLSong = fetch('js/solar.xml');
+				var songModel = LJS.converters.MusicXML.SongModel_MusicXML.importFromMusicXML(musicXMLSong);
+				var MusicCSLSong = LJS.converters.MusicCSLJson.SongModel_CSLJson.exportToMusicCSLJSON(songModel);
+				var params = {
+					viewer: {
+						HTMLElement: $("#leadsheet_container")[0],
+						viewOptions: {
+							displayTitle: true,
+							displayComposer: true,
+							layer: true, // a layer placed in top of the basic canvas. Needed if we want to be able to edit  
+							typeResize: "fluid", // "scale" | "fluid"
+							heightOverflow: "auto", // "scroll" | "auto"
+						}
+					},
+				};
+				var myLeadsheet = LJS.init(MusicCSLSong, params);
+			};
+			addSnippet('javascript', init.toString());
+			Prism.highlightAll();
+
+
+			init();
+		});
+	});
+</script>
+{% endcapture %}
+
+{% include leadsheetjs.html %}

@@ -3,9 +3,25 @@ layout: default
 ---
 
 <div class="home">
+  <h1 class="page-heading">LeadsheetJS: a JavaScript library for managing lead sheets</h1>
+  <div class="page-content">
+  <p>This library has been developed by Daniel Martin, Timotée Neullas and Vincent Degroote in the Sony CSL Paris music team.</p>
+  {% include icon-github.html username="SonyCSL-Paris" %} /  <a href="https://github.com/SonyCSL-Paris/LeadsheetJS/">LeadsheetJS</a></p>
 
-  <h1 class="page-heading">Posts</h1>
-
+  <p>To use it, take a look at the README file in 
+  <p>Examples:</p>
+      <ul>
+        <li><a href="{{site.baseurl}}/leadsheetjs-viewer.html">Viewer</a></li>  
+        <li><a href="{{site.baseurl}}/leadsheetjs-music-xml.html">Import from MusicXML</a></li>  
+        <li><a href="{{site.baseurl}}/leadsheetjs-midi.html">Midi player</a></li>  
+        <li><a href="{{site.baseurl}}/leadsheetjs-audio.html">Audio player</a></li>  
+        <li><a href="{{site.baseurl}}/leadsheetjs-editor.html">Lead sheet editing</a></li>  
+        <li><a href="{{site.baseurl}}/leadsheetjs-editor-menu.html">Lead sheet editing with menu</a></li>  
+        <li><a href="{{site.baseurl}}/leadsheetjs-tags.html">Adding tags to a lead sheet /a></li>  
+        <li><a href="{{site.baseurl}}/leadsheetjs-comments.html">Adding comments to a lead sheet</a></li>  
+      </ul>
+  </div>
+{% comment %} 
   <ul class="post-list">
     {% for post in site.posts %}
       <li>
@@ -19,5 +35,6 @@ layout: default
   </ul>
 
   <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+{% endcomment %}
 
 </div>

@@ -1,0 +1,62 @@
+---
+layout: default
+---
+{% capture htmlContent %}
+{% endcapture %}
+	<p class="subtitle"><em>Leadsheet editor</em></p>
+	<div id="menu-container"></div>
+	<div id="leadsheet_container_edition"></div>
+	<div id="informations_container">
+		<p>Editing is enabled and there is an editing menu. Just like in <a href="/leadsheetJS/example_editor">the simple editing example</a>, extra styles are needed for the menu (check this page's css).</p>
+	</div>
+	<div id="code_container"></div>
+{% capture codeContent %}
+<script type="text/javascript">
+	require([
+		'LJS',
+		'jquery',
+		'pubsub',
+		'bootstrap',
+		'tests/songs/solar'
+	], function(LJS, $, pubsub, bootstrap, song) {
+		$(document).ready(function() {
+			var init = function() {
+				var params = {
+					viewer: {
+						HTMLElement: $("#leadsheet_container_edition")[0],
+						viewOptions: {
+							displayTitle: true,
+							displayComposer: true,
+							layer: true, // a layer placed in top of the basic canvas. Needed if we want to be able to edit  
+							typeResize: "fluid", // "scale" | "fluid"
+							heightOverflow: "auto", // "scroll" | "auto"
+						}
+					},
+					edition: {
+						notes: true,
+						imgUrl: {
+							notes: '/images/LeadsheetJS/edit/',
+							chords: '/images/LeadsheetJS/edit/',
+							structure: '/images/LeadsheetJS/edit/',
+						},
+						chords: true,
+						structure: true,
+						menu: {
+							HTMLElement: document.getElementById('menu-container')
+						},
+						composerSuggestions: ['Miles Davis', 'John Coltrane', 'Bill Evans', 'Charlie Parker', 'Thelonious Monk']
+					}
+				};
+
+				var myLeadsheet = LJS.init(song, params);
+				
+			};
+			init();
+			addSnippet('javascript', init.toString());
+			Prism.highlightAll();
+		});
+	});
+</script>
+{% endcapture %}
+
+{% include leadsheetjs.html %}

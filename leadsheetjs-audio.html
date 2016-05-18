@@ -1,0 +1,71 @@
+---
+layout: default
+---
+{% capture htmlContent %}
+		<p class="subtitle"><em>Insert audio to your leadsheet</em></p>
+		<div id="leadsheet_container"></div>
+		<div id="player_container"></div>
+		<div id="informations_container">
+			<p>
+				You can link audio files to your leadsheet.<br />
+				Here is the snippet corresponding to LeadsheetJS and audio initialization.
+			</p>
+		</div>
+		<div id="code_container"></div>
+{% endcapture %}
+
+{% capture codeContent %}
+<script type="text/javascript">
+require([
+		'LJS',
+		'jquery',
+		'pubsub',
+		'bootstrap',
+		'tests/songs/solar'
+	], function(LJS, $, pubsub, bootstrap, song) {
+		$(document).ready(function() {
+			var init = function() {
+
+				var params = {
+					viewer: {
+						HTMLElement: $("#leadsheet_container")[0],
+						viewOptions: {
+							displayTitle: true,
+							displayComposer: true,
+							layer: true, // a layer placed in top of the basic canvas. Needed if we want to be able to edit  
+							typeResize: "fluid", // "scale" | "fluid"
+							heightOverflow: "auto", // "scroll" | "auto"
+						}
+					},
+					player: {
+						HTMLElement: $('#player_container')[0],
+						imgUrl: '/images/LeadsheetJS/player',
+						viewOptions: {
+							displayMetronome: false,
+							displayLoop: false,
+							displayTempo: false,
+							changeInstrument: false,
+							autoload: false,
+							progressBar: true
+						},
+						audio:{
+							audioFile: 'http://lsdb.flow-machines.com/sampleLJS/media/solar_120.mp3',
+							tempo: 120
+
+						}
+					}
+				};
+				var myLeadsheet = LJS.init(song, params);
+			};
+			init();
+
+			addSnippet('javascript', init.toString());
+			// addSnippet('css', init.toString());
+			// addSnippet('markup', init.toString());
+			Prism.highlightAll();
+		});
+	});
+</script>
+{% endcapture %}
+
+{% include leadsheetjs.html %}

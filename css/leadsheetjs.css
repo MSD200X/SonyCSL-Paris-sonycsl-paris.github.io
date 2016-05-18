@@ -1,0 +1,353 @@
+/********* PLAYER ***********/
+#playerview{
+	background: #c1e0ea;
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	z-index: 100;
+	box-shadow: 0 2px 10px black;
+}
+
+#switch_player{
+	border-right: thin solid #000000;
+	height: 100%;
+	line-height: 66px;
+	margin: 0;
+	padding: 0 1em;
+	vertical-align: top;
+}
+
+#player_buttons_container {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: inline-block;
+/*	border-right: 1px solid black;*/
+	height: 100%;
+/*	padding: 20px 15px;*/
+}
+
+#type_button_container, #stop_button_container, #play_button_container, #tempo_container, #metronome_container, #volume_container, #volume_slider_container, #pause_button_container, #loop_button_container {
+	display: inline-block;
+	text-align: center;
+}
+
+#loop_button .loop_on{
+	display: none;
+}
+#volume_slider_container {
+	z-index: 1;
+	position: relative;
+	cursor: pointer;
+}
+#volume_controller {
+	vertical-align: bottom !important;
+}
+#volume_controller_barre {
+	position: absolute;
+	z-index: 2;
+	right: 2px;
+	top: 20px;
+}
+
+.player_button {
+	cursor: pointer;
+	margin: 4px;
+	padding: 3px;
+	min-width: 50px;
+}
+
+.player_button:hover {
+	background: white;
+}
+#all-metronome .metronome_on{
+	display: none;
+}
+
+#all-sound .sound_off, #all-sound .sound_1, #all-sound .sound_2{
+	display: none;
+}
+#pause_button_container{
+	display:none;
+}
+
+#tempo_container input{
+	width: 41px;
+	margin: 0px;
+}
+
+#player_instrument_container {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: inline-block;
+/*	vertical-align:top;*/
+	height: 100%;
+	margin-left: 10px;
+}
+/*#player_instrument_container .current_button{
+	vertical-align: top;
+}*/
+#player_chords {
+	display: inline-block;
+}
+#player_melody {
+	display: inline-block;
+}
+#pick_style_container{
+	display: inline-block;
+	vertical-align: top;
+}
+#pick_style_container a{
+	color: black;
+	text-decoration: none;
+}
+#export_container{
+	display: inline-block;
+	vertical-align: top;
+}
+#save_menu_each_container{
+	margin-bottom: 10px;
+	margin-top: 4px;
+}
+#chords_title_container, #melody_title_container {
+	line-height: 50px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#chords_instrument_container, #chords_style_container, #melody_instrument_container, #melody_style_container {
+	display: inline-block;
+	text-align: center;
+}
+
+#player_instrument_container select {
+	height: 29px;
+	width: 175px;
+	margin: 3px 0 0;
+}
+
+.progress_bar_player {
+	margin-bottom: 0 !important;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+	height: 15px !important;
+	border-radius: 0;
+	cursor: pointer;
+}
+
+.progress_bar_player span {
+	line-height: 16px;
+	vertical-align: top;
+}
+
+@media screen and (max-width: 860px) {
+	#playerview img{
+		width: 20px;
+	}
+	.player_button{
+		min-width: 20px;
+	}
+}
+
+/* EDITING **/
+/********* Note edition ***********/
+
+#edit_notes_second_level > div {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: inline-block;
+	vertical-align: top;
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-top: 1em;
+	margin-top: 1em;
+	border-right: 1px solid #bbb;
+}
+
+#edit_each_pitch_container, #edit_each_alteration_container, #edit_each_rhythm_container, #edit_each_note_container, #edit_each_symbol_container {
+	font-size: 1.8em;
+}
+
+#edit_notes_second_level .current_button{
+	min-width: 5px;
+	height: 30px;
+	text-align: center;
+}
+
+
+@media screen and (max-width: 960px) {
+	#edit_notes_second_level .current_button img{
+		max-width: 15px;
+	}
+	#edit_notes_second_level .current_button{
+		font-size: smaller;
+		margin: 4px 0;
+	}
+}
+/******* Bar Edition ******/
+#edit_bars_second_level > div {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: inline-block;
+	vertical-align: top;
+	padding-left: 0.9em;
+	padding-right: 0.9em;
+	padding-top: 1em;
+	margin-top: 1em;
+	border-right: 1px solid #bbb;
+}
+
+#edit_bars_second_level select {
+	width: auto !important;
+	margin: 0;
+}
+#edit_bars_second_level input {
+	width: auto !important;
+}
+
+/********* EDITOR ***********/
+#editor_menu_second_level > div {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: inline-block;
+	vertical-align: top;
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-top: 1em;
+	margin-top: 1em;
+	border-right: 1px solid #bbb;
+}
+.sound_export_options{
+	display: inline-block;
+}
+.sound_export_options label{
+	display: inline;
+}
+.sound_export_options input{
+	margin: 0;
+}
+
+
+ 
+.top_menu>li>a {
+	padding: 10px 14px 10px !important;
+}
+ #menu-container {
+	position: relative;/*absolute*/
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 100;
+	height: 133px;
+}
+ .affix{
+	z-index: 1000;
+	right: 0;
+	left: 0;
+	height: 133px;
+	position: fixed !important;
+	-o-box-shadow: 0px 3px 5px #888;
+	-moz-box-shadow: 0px 3px 5px #888;
+	-webkit-box-shadow: 0px 3px 5px #888;
+	box-shadow: 0px 3px 5px #888;
+}
+#main_menu_first_level {
+	background-color: white;
+	text-align: center;
+	padding-top: 5px;
+}
+
+.first_level {
+	background-color: #ebebeb;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-moz-border-radius: 10px 10px 0 0;
+	-webkit-border-radius: 10px 10px 0 0;
+	-o-border-radius: 10px 10px 0 0;
+	border-radius: 10px 10px 0 0;
+	display: inline-block;
+	width: 125px;
+	text-align: center;
+	margin: 0 0.3em;
+	cursor: pointer;
+	line-height: 2em;
+}
+
+.first_level:hover{
+	background-color: #ccc;
+}
+.main_menu_first_level_selected {
+	border-bottom: none !important;
+	background-color: #c1e0ea !important;
+}
+
+#main_menu_second_level {
+	background-color: #c1e0ea;
+}
+#main_menu_second_level > div {
+	height: 100px;
+	overflow: hidden;
+	text-align: center;
+}
+
+.second_level > div > div {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: inline-block;
+	height: 100%;
+	vertical-align: top;
+	text-align: center;
+}
+
+.current_button {
+	cursor: pointer;
+	margin: 4px;
+	padding: 3px;
+	display: inline-block;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.current_button:hover {
+	background: white;
+}
+
+/*** COMMENTS ***/
+.speech-bubble {
+    height:120px;
+    background-color: #f8f8f8;
+    border: 1px solid #a8a8f8;
+    border-radius: 5px;
+    max-width: 400px;
+    text-align: center;
+    padding: 5px;
+    position: absolute;
+    z-index: 20010;
+}
+.speech-bubble .textComment{
+	overflow-y: auto;
+	padding: 10px 10px 0 10px;
+	height: 78%;
+}
+.speech-bubble .arrow {
+    border-style: solid;
+    position: absolute;
+}
+/* bubble bottom*/
+.bottom {
+    border-color: #c8c8f8 transparent transparent transparent;
+    border-width: 8px 8px 0px 8px;
+    bottom: -8px;
+}

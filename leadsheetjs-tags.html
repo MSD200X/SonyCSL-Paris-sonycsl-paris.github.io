@@ -1,0 +1,73 @@
+---
+layout: default
+---
+{% capture htmlContent %}
+{% endcapture %}
+
+<p class="subtitle"><em>Add hover informations with Tags</em></p>
+	<div id="leadsheet_container"></div>
+	<div id="informations_container">
+		<p>
+			You can add visual tags on your leadsheet.<br />
+			You just need to create an array containing 'startbeat' and 'endbeat' value.<br />
+			You can optionnally add a name and a color.<br />
+			Here is an example
+		</p>
+		<pre><code class="language-javascript">{'startBeat': 1, 'endBeat': 5, 'name': 'First bar', 'color': "#559"}</code></pre>
+	</div>
+	<div id="code_container"></div>
+{% capture codeContent %}
+<script type="text/javascript">
+	require([
+		'LJS',
+		'jquery',
+		'pubsub',
+		'bootstrap',
+		'tests/songs/solar'
+	], function(LJS, $, pubsub, bootstrap, song) {
+		$(document).ready(function() {
+			var init = function() {
+				var params = {
+					viewer: {
+						HTMLElement: $("#leadsheet_container")[0],
+						viewOptions: {
+							displayTitle: true,
+							displayComposer: true,
+							layer: true, // a layer placed in top of the basic canvas. Needed if we want to be able to edit  
+							typeResize: "fluid", // "scale" | "fluid"
+							heightOverflow: "auto", // "scroll" | "auto"
+						}
+					},
+					tags: [{
+						startBeat: 1,
+						endBeat: 5,
+						name: 'First bar',
+						color: "#559"
+					}, {
+						startBeat: 5,
+						endBeat: 16,
+						name: 'This is the second part',
+						color: "#995"
+					}, {
+						startBeat: 16,
+						endBeat: 33,
+						name: 'New line !',
+						color: "#599"
+					}, {
+						startBeat: 44,
+						endBeat: 49,
+						name: 'Outro',
+						color: "#595"
+					}]
+				};
+				var myLeadsheet = LJS.init(song, params);
+			
+			};
+			init();
+			addSnippet('javascript', init.toString());
+			Prism.highlightAll();
+		});
+	});</script>
+{% endcapture %}
+
+{% include leadsheetjs.html %}

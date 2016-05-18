@@ -1,10 +1,8 @@
 ---
 layout: default
 ---
-<link href="css/prism.css" rel="stylesheet" / >
-<div class="home">
-
- <p class="subtitle"><em>Visualize your leadsheets</em></p>
+{% capture htmlContent %}
+<p class="subtitle"><em>Visualize your leadsheets</em></p>
     <div id="leadsheet_container"></div>
     <div id="informations_container">
       <p>This is the code to simply visualize a lead sheet. You need a lead sheet in our format. You can determine the size of the div containing the lead sheet and LeadsheetJS will adapt to that size.</p>
@@ -25,14 +23,10 @@ layout: default
       <!--pre><code class="language-javascript"></code></pre-->
     </div>
     <div id="code_container"></div>
-</div>
-<script src="js/prismjs.min.js"></script>
-<script src="js/require.min.js"></script>
-<script src="node_modules/LeadsheetJS/config.js"></script>
+{% endcapture %}
+
+{% capture codeContent %}
 <script type="text/javascript">
-requirejs.config({
-  baseUrl: "/node_modules/LeadsheetJS"
-});
 
 require([
     'LJS',
@@ -41,7 +35,7 @@ require([
     'tests/songs/solar'
 
   ], function(LJS, $, pubsub, song) {
-    $(document).ready(function() {
+  $(document).ready(function() {
       var init = function() {
         var params = {
           viewer: {
@@ -59,29 +53,11 @@ require([
         
       };
       init();
-      /*
-          THIS CODE GOES INSIDE init() AND SHOWS HOW THE VIEWER IS RESIZED
-          /var widthDiff = 20;
-          setInterval(function(){
-            console.log();
-            var newWidth = $('#leadsheet_container').width() - widthDiff;
-            if (newWidth - widthDiff < 100 || newWidth - widthDiff > 1800){
-              widthDiff *= -1;
-            }
-            $('#leadsheet_container').width(newWidth);
-            $.publish('ToViewer-resize',myLeadsheet.songModel);
-          },100);
-        */  
-      function addSnippet(language, text) {
-        var id = Math.ceil(Math.random() * 1000000);
-        $('#code_container').append('<p>' + language.charAt(0).toUpperCase() + language.slice(1).toLowerCase() + ':<br/><pre><code class="language-' + language + '"><span id="code-' + id + '"></span></pre></code></p>');
-        $('#code-' + id).text(text);
-      }
-
       addSnippet('javascript', init.toString());
-      // addSnippet('css', init.toString());
-      // addSnippet('markup', init.toString());
       Prism.highlightAll();
     });
   });
 </script>
+{% endcapture %}
+
+{% include leadsheetjs.html %}

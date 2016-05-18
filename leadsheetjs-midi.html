@@ -1,0 +1,70 @@
+---
+layout: default
+---
+{% capture htmlContent %}
+	<p class="subtitle"><em>Leadsheet midi player</em></p>
+	<div id="leadsheet_container"></div>
+	<div id="player"></div>
+	<div id="code_container"></div>
+{% endcapture %}
+
+{% capture codeContent %}
+<script type="text/javascript">
+require([
+		'LJS',
+		'jquery',
+		'pubsub',
+		'bootstrap',
+    	'tests/songs/solar'		
+	], function(LJS, $, pubsub, bootstrap, song) {
+		$(document).ready(function() {
+			var init = function() {
+				
+				var params = {
+					viewer: {
+						HTMLElement: $("#leadsheet_container")[0],
+						viewOptions: {
+							displayTitle: true,
+							displayComposer: true,
+							layer: true, // a layer placed in top of the basic canvas. Needed if we want to be able to edit  
+							typeResize: "fluid", // "scale" | "fluid"
+							heightOverflow: "auto", // "scroll" | "auto"
+						}
+					},
+					player:{
+						HTMLElement: $('#player')[0],
+						imgUrl: '/images/LeadsheetJS/player',
+						viewOptions: {
+							displayMetronome: true,
+							displayLoop: true,
+							displayTempo: true,
+							changeInstrument: false,
+							autoload: false,
+							progressBar: true
+						},
+						midi:{
+							soundfontUrl: 'js/soundfont/'
+						},
+						interactive: true //user can click on a note to start playing from it
+					}
+
+				};
+				var myLeadsheet = LJS.init(song, params);
+			};
+			init();
+
+			function addSnippet(language, text) {
+				var id = Math.ceil(Math.random() * 1000000);
+				$('#code_container').append('<p>' + language.charAt(0).toUpperCase() + language.slice(1).toLowerCase() + ':<br/><pre><code class="language-' + language + '"><span id="code-' + id + '"></span></pre></code></p>');
+				$('#code-' + id).text(text);
+			}
+
+			addSnippet('javascript', init.toString());
+			// addSnippet('css', init.toString());
+			// addSnippet('markup', init.toString());
+			Prism.highlightAll();
+		});
+	});</script>
+{% endcapture %}
+
+{% include leadsheetjs.html %}

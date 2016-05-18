@@ -1,0 +1,21 @@
+<link href="css/prism.css" rel="stylesheet" / >
+<link href="css/bootstrap.css" rel="stylesheet" / >
+<link href="css/leadsheetjs.css" rel="stylesheet" / >
+<div class="home">
+<a  style='float:right;' href="/">< Back to examples</a>
+{{htmlContent}}
+</div>
+<script src="js/prismjs.min.js"></script>
+<script src="js/require.min.js"></script>
+<script src="node_modules/LeadsheetJS/config.js"></script>
+<script type="text/javascript">
+requirejs.config({
+  baseUrl: '/node_modules/LeadsheetJS/'
+});
+function addSnippet(language, text) {
+  var id = Math.ceil(Math.random() * 1000000);
+  $('#code_container').append('<p>' + language.charAt(0).toUpperCase() + language.slice(1).toLowerCase() + ':<br/><pre><code class="language-' + language + '"><span id="code-' + id + '"></span></pre></code></p>');
+  $('#code-' + id).text(text);
+}
+</script>
+{{codeContent}}
